@@ -93,5 +93,7 @@
             </snapshots>
         </pluginRepository>
     </pluginRepositories> -->
+    
+    <!-- This is new commit releated to parent POM -->
 
 </project>
