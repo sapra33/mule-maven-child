@@ -13,7 +13,6 @@
 		<groupId>686e7f1d-2f37-41c7-bc50-ad7636e7b936</groupId>
 		<artifactId>mule-maven-parent</artifactId>
 	    <version>1.0.0-SNAPSHOT</version>
-	    <relativePath>..</relativePath>
 	</parent>
 <!-- 
     <properties>
