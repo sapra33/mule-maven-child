@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core"
+	xmlns:db="http://www.mulesoft.org/schema/mule/db" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/current/mule-db.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="2cd0f00a-19da-448d-b58c-f06dc987ce6e" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<flow name="mule-maven-childFlow" doc:id="a16f7a7b-5ba3-4caa-a71b-2933c345e0a5" >
+		<http:listener doc:name="Listener" doc:id="0aa5872f-8b65-4c59-8acd-a971166acea6" config-ref="HTTP_Listener_config" path="/child"/>
+		<db:select doc:name="Select" doc:id="9c8a8feb-dd91-4721-a754-c14adbf00431" config-ref="Database_Config">
+			<db:sql >select * from flights_customers where  accountID = :id</db:sql>
+			<db:input-parameters ><![CDATA[#[{
+	"id": attributes.queryParams['id']
+	
+}]]]></db:input-parameters>
+		</db:select>
+		<choice doc:name="Choice" doc:id="0a19005a-a1ec-4373-9509-d571d3a1e30f" >
+			<when expression="#[sizeOf(payload) &gt; 0]">
+				<ee:transform doc:name="Transform Message" doc:id="d82f6864-e0e9-4538-b77c-9b638a68cc9e" >
+					<ee:message >
+						<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+	payload
+]]></ee:set-payload>
+					</ee:message>
+				</ee:transform>
+				
+			</when>
+			<otherwise >
+				<set-payload value='#["No data found in DB, Please check!!!"]' doc:name="Set Payload" doc:id="8e3e88f6-eba3-4389-b190-dbf8cd2464a1" />
+			</otherwise>
+		</choice>
+	</flow>
+</mule>
