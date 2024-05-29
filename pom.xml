@@ -13,6 +13,7 @@
 		<groupId>com.mycompany</groupId>
 		<artifactId>mule-maven-parent</artifactId>
 	    <version>1.0.0-SNAPSHOT</version>
+	    <relativePath>..</relativePath>
 	</parent>
 <!-- 
     <properties>
@@ -93,5 +94,7 @@
             </snapshots>
         </pluginRepository>
     </pluginRepositories> -->
+    
+    <!-- This is new commit releated to parent POM -->
 
 </project>
