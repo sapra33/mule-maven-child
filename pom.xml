@@ -13,9 +13,25 @@
 	    <version>1.0.0-SNAPSHOT</version>
 	</parent>
 
-    <properties>
-    	<type>custom</type>
-	</properties> 
+	 <build>
+	    <plugins>
+	        <plugin>
+	            <groupId>org.mule.tools.maven</groupId>
+	            <artifactId>exchange-mule-maven-plugin</artifactId>
+	            <executions>
+	                <execution>
+	                    <id>validate</id>
+	                    <phase>none</phase> <!-- Disable the validate phase execution -->
+	                </execution>
+	                <execution>
+	                    <id>deploy</id>
+	                    <phase>none</phase> <!-- Disable the deploy phase execution -->
+	                </execution>
+	            </executions>
+	        </plugin>
+	    </plugins>
+	</build>
+ 
 
 	<dependencies>
         <dependency>
