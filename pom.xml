@@ -2,45 +2,44 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.mycompany</groupId>
+	<groupId>686e7f1d-2f37-41c7-bc50-ad7636e7b936</groupId>
 	<artifactId>mule-maven-child</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <packaging>mule-application</packaging>
-
-	<name>mule-maven-child</name>
-	
+	<name>mule-maven-child</name>	
 	<parent>
-		<groupId>com.mycompany</groupId>
+		<groupId>686e7f1d-2f37-41c7-bc50-ad7636e7b936</groupId>
 		<artifactId>mule-maven-parent</artifactId>
 	    <version>1.0.0-SNAPSHOT</version>
 	</parent>
-<!-- 
-    <properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-		<app.runtime>4.2.1</app.runtime>
-		<mule.maven.plugin.version>3.2.7</mule.maven.plugin.version>
-	</properties> -->
-
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.mule.tools.maven</groupId>
-				<artifactId>mule-maven-plugin</artifactId>
-				<version>${mule.maven.plugin.version}</version>
-				<extensions>true</extensions>
-				<configuration>
-				<sharedLibraries>
-                        <sharedLibrary>
-                            <groupId>mysql</groupId>
-                            <artifactId>mysql-connector-java</artifactId>
-                        </sharedLibrary>
-                    </sharedLibraries>
-                </configuration>
-			</plugin>
-		</plugins>
+   <build>
+	    <plugins>
+	        <plugin>
+	            <groupId>org.mule.tools.maven</groupId>
+	            <artifactId>exchange-mule-maven-plugin</artifactId>
+	            <executions>
+	                <execution>
+	                    <id>validate</id>
+	                    <phase>none</phase> <!-- Disable the validate phase execution -->
+	                </execution>
+	                <execution>
+	                    <id>deploy</id>
+	                    <phase>none</phase> <!-- Disable the deploy phase execution -->
+	                </execution>
+	            </executions>
+	        </plugin>
+	    </plugins>
 	</build>
+
+	<dependencies>
+        <dependency>
+            <groupId>org.mule.connectors</groupId>
+            <artifactId>mule-http-connector</artifactId>
+            <version>1.9.1</version>
+            <classifier>mule-plugin</classifier>
+        </dependency>
+    </dependencies>
 
 	<!-- <dependencies>
         <dependency>
@@ -93,5 +92,7 @@
             </snapshots>
         </pluginRepository>
     </pluginRepositories> -->
+    
+    <!-- This is new commit releated to parent POM -->
 
 </project>
